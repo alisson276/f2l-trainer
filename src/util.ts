@@ -17,6 +17,8 @@ export const format = (time: number): string => {
   return `${seconds}.${paddedDeciSeconds}`;
 };
 
-export const getRandomElement = <A>(arr: Array<A>): A => {
-  return arr[getRandomInt(arr.length)];
+export const getRandomElement = <A>(arr: Array<A>, current: A): A => {
+  let n = arr.findIndex((c) => c === current)
+  console.log(n)
+  return arr[n+1];
 };

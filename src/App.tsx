@@ -85,7 +85,7 @@ const reducer = (state: State, action: Action): State => {
       };
 
       const nextAlgId = state.goToNextCaseAfterSolve
-        ? Util.getRandomElement(state.algsToTrain)
+        ? Util.getRandomElement(state.algsToTrain, state.currentAlg.id)
         : state.currentAlg.id;
 
       const nextAlg = algs.find((alg) => alg.id === nextAlgId) ?? algs[0];
@@ -121,7 +121,7 @@ const reducer = (state: State, action: Action): State => {
       };
     }
     case ActionType.GoToNextCase: {
-      const nextAlgId = Util.getRandomElement(state.algsToTrain);
+      const nextAlgId = Util.getRandomElement(state.algsToTrain, state.currentAlg.id);
       const nextAlg = algs.find((alg) => alg.id === nextAlgId) ?? algs[0];
 
       return {
@@ -130,7 +130,7 @@ const reducer = (state: State, action: Action): State => {
       };
     }
     case ActionType.SetAlgsToTrain: {
-      const nextAlgId = Util.getRandomElement(action.algsToTrain);
+      const nextAlgId = Util.getRandomElement(action.algsToTrain, state.currentAlg.id);
       const nextAlg = algs.find((alg) => alg.id === nextAlgId) ?? algs[0];
 
       return {
@@ -320,10 +320,10 @@ interface State {
 
 const initialState: State = {
   algsToTrain: algs.map((alg) => alg.id),
-  currentAlg: Util.getRandomElement(algs),
+  currentAlg: Util.getRandomElement(algs, algs[0]),
   timer: Timer.initial(),
   showSolutions: true,
-  goToNextCaseAfterSolve: true,
+  goToNextCaseAfterSolve: false,
   times: [],
   showCasesModal: false,
 };
