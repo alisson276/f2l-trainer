@@ -75,17 +75,25 @@ const algs: Alg[] = [
   {
     id: 5,
     scramble: `L' U' L U L' U L U2 y'`,
-    solutions: [`y U2 (L' U' L) U' (L' U L)`]
+    solutions: [
+      `y' U2 (R' U' R) U' (R' U R)`,
+      `Rw U' Rw' U2 Rw U Rw'`,
+      `y U2 (L' U' L) U' (L' U L)`
+    ]
   },
   {
     id: 6,
     scramble: `L' U' L U L' U2 L U y'`,
-    solutions: [`y U' (L' U2 L) U' (L' U L)`]
+    solutions: [
+      `y' U' R' U2 R U' (R' U R)`,
+      `y U' (L' U2 L) U' (L' U L)`
+    ]
   },
   {
     id: 7,
     scramble: `R U R' F R U R' U' F'`,
     solutions: [
+      `F (U R U' R') F' (R U' R')`,
       `y U' (L' U L) U (L' U L U' L' U L)`,
       `F (U R U' R') F' (R U' R')`,
       `U' R U (R2' F R F') (R U' R')`
@@ -94,7 +102,10 @@ const algs: Alg[] = [
   {
     id: 8,
     scramble: `L' U L U' L' U2 L y'`,
-    solutions: [`y (L' U2 L) U (L' U' L)`]
+    solutions: [
+      `y' (R' U2' R) U (R' U' R)`,
+      `y (L' U2 L) U (L' U' L)`
+    ]
   },
   {
     id: 9,
@@ -128,12 +139,18 @@ const algs: Alg[] = [
   {
     id: 13,
     scramble: `L' U L y'`,
-    solutions: [`y (L' U' L)`]
+    solutions: [
+      `y' (R' U' R)`,
+      `F' U' F`,
+      `y (L' U' L)`
+    ]
   },
   {
     id: 14,
     scramble: `L' U L U L' U L U' y'`,
     solutions: [
+      `U' R U' R' Dw R' U' R`,
+      `y' U (R' U' R U') (R' U' R)`,
       `y U (L' U' L) U' (L' U' L)`,
       `y U2 (L' U L) U (L' U' L)`,
       `y L U' L2' U' L *`
@@ -143,6 +160,7 @@ const algs: Alg[] = [
     id: 15,
     scramble: `L U L2 U L2 U2 L' y'`,
     solutions: [
+      `U' (R U2' R' U) y' (R' U' R)`,
       `y L U2 L2' U' L2 U' L'`,
       `y (L' U L) U' (L' U L) U2 (L' U L)`,
       `y L U2 L2' U' L *`,
@@ -152,17 +170,26 @@ const algs: Alg[] = [
   {
     id: 16,
     scramble: `L' U L U L' U' L U' y'`,
-    solutions: [`y U (L' U L) U' (L' U' L)`]
+    solutions: [
+      `y' U (R' U R U') (R' U' R)`,
+      `y U (L' U L) U' (L' U' L)`
+    ]
   },
   {
     id: 17,
     scramble: `L' U' L U y'`,
-    solutions: [`y U' (L' U L)`]
+    solutions: [
+      `y' U' (R' U R)`,
+      `y U' (L' U L)`
+    ]
   },
   {
     id: 18,
     scramble: `L' U' L U2 L' U2 L U' y'`,
-    solutions: [`y U (L' U2 L) U2 (L' U L)`]
+    solutions: [
+      `y' U (R' U2' R) U2 (R' U R)`,
+      `y U (L' U2 L) U2 (L' U L)`
+    ]
   },
   {
     id: 19,
@@ -173,6 +200,8 @@ const algs: Alg[] = [
     id: 20,
     scramble: `R U R' U' R' D' R U R' D R`,
     solutions: [
+      `R U R' U2 R U' R' (U R U' R')`,
+      `y' (R' U R) U2' y (R U R')`,
       `M U (L F' L') U' M'`,
       `U (R' F R F') U (R U R')`,
       `(R U2 R') U (R U R') U (R U' R')`,
@@ -193,12 +222,16 @@ const algs: Alg[] = [
   {
     id: 23,
     scramble: `L' U' L U2 L' U L U' y'`,
-    solutions: [`y U (L' U' L) U2 (L' U L)`]
+    solutions: [
+      `y' U (R' U' R) U2 (R' U R)`,
+      `y U (L' U' L) U2 (L' U L)`
+    ]
   },
   {
     id: 24,
     scramble: `L' U L y' U2 R U R'`,
     solutions: [
+      `(R U' R') U2 y' (R' U' R)`,
       `(R U' R') U2 y (L' U' L)`,
       `(R2 B' R' B R') U2 (R U' R')`,
       `U M' U R U' r' U' R U R'`,
@@ -245,6 +278,7 @@ const algs: Alg[] = [
     id: 29,
     scramble: `L' U L y' U' R U' R' U`,
     solutions: [
+      `(U' R U R') U y' (R' U' R)`,
       `U' (R U R') U y (L' U' L)`,
       `y U2 (F U' F') U' (L' U' L)`,
       `y' U2 (f R f') U' (R' U R)`,
@@ -256,6 +290,7 @@ const algs: Alg[] = [
     scramble: `R U R' F R' F' R U`,
     solutions: [
       `U' (R' F R F') (R U' R')`,
+      `(R U' R' U) y' (R' U R)`,
       `(R U' R') (F' U2 F)`,
       `y' R' U R' F R F' R`
     ]
@@ -280,16 +315,17 @@ const algs: Alg[] = [
     scramble: `R U' R' F R' F' R U`,
     solutions: [
       `U' (R' F R F') (R U R')`,
+      `U' F' (R U R' U') R' F R`,
       `R' F' R (U R U' R') F`,
-      `U' F' R U R' U' R' F R`,
       `R2 U' R' U R2 *`
     ]
   },
   {
     id: 34,
-    scramble: `L' U L U' L' U L y'`,
+    scramble: `(R U R' U') (F R' F' R)`,
     solutions: [
-      `y (L' U' L) U (L' U' L)`,
+      `(R' F R F') (U R U' R')`,
+      `y' (R' U' R U) (R' U' R)`,
       `(R' F R F')2`,
       `M' (U R U' R') (U R U' r')`,
       `M' (U R U' r') (U R U' R')`
@@ -298,13 +334,19 @@ const algs: Alg[] = [
   {
     id: 35,
     scramble: `L' U' L U L' U' L y'`,
-    solutions: [`y (L' U L) U' (L' U L)`]
+    solutions: [
+      `(R U R' U') F R' F' R`,
+      `y' (R' U R) U' (R' U R)`,
+      `y (L' U L) U' (L' U L)`
+    ]
   },
   {
     id: 36,
     scramble: `L' U' L y' U R U R' U'`,
     solutions: [
-      `U (R U' R' U') y (L' U L)`,
+      `(U R U' R') U' y' (R' U R)`,
+      `(U R U' R') F R' F' R`,
+      `(U R U' R') U' y (L' U L)`,
       `y U (L F' L' F) (L' U' L)`,
       `y D (U' L' U L) D' *`,
       `y' R U R U R U' R' U' R'`
@@ -318,14 +360,19 @@ const algs: Alg[] = [
   {
     id: 38,
     scramble: `R U R' U2 R U' R' U R U R'`,
-    solutions: [`(R U' R') U' (R U R') U2 (R U' R')`]
+    solutions: [
+      `(R U' R') U' (R U R') U2 (R U' R')`,
+      `(R U R' U') R U2 R' U' (R U R')`
+    ]
   },
   {
     id: 39,
     scramble: `F' U F U' R U2 R' U' R U2 R'`,
     solutions: [
-      `(R U2 R') U (R U2 R') U (F' U' F)`,
       `(R' F R F') R' U2 R2 U R2' U R`,
+      `(R U' R') d (R' U2 R) U2' (R' U R)`,
+      `(R U2 R') U (R U2 R') U (F' U' F)`,
+      `R2 U2 F R2 F' U2 R' U R'`,
       `(R U' R') U y' R' U2 R U2 R' U R`,
       `D (R' F R F') (R U' R') D' *`
     ]
@@ -334,6 +381,7 @@ const algs: Alg[] = [
     id: 40,
     scramble: `r U' r' U2 r U r' R U R'`,
     solutions: [
+      `(R U R' U') (R U' R') U2 y' (R' U' R)`,
       `(R U' R') (r U' r') U2 (r U r')`,
       `(R U' R') U2 y (L' U' L) U' (L' U L)`,
       `(R U R') y' (R U' R') U (R' U' R) *`
@@ -342,7 +390,14 @@ const algs: Alg[] = [
   {
     id: 41,
     scramble: `R U' R' r U' r' U2 r U r'`,
-    solutions: [`(r U' r') U2 (r U r') (R U R')`, `R U' R2' U' R y (L' U' L) *`]
+    solutions: [
+      `(F' U F) U2' (R U R' U) (R U' R')`,
+      `R F (U R U' R') F' U' R'`,
+      `(R U' R') F (R U R' U') F' (R U' R')`,
+      `(R U R' U') F (U R U' R') F' (R U' R')`,
+      `(r U' r') U2 (r U r') (R U R')`,
+      `R U' R2' U' R y (L' U' L) *`
+    ]
   },
   // Section 2A
   {
