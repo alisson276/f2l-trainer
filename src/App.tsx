@@ -36,6 +36,7 @@ enum ActionType {
   ReadyTimer,
   ToggleShowSolutions,
   ToggleGoToNextCaseAfterSolve,
+  ToggleRandomCases,
   SetAlgsToTrain,
   ShowCasesModal,
   HideCasesModal,
@@ -50,6 +51,7 @@ type Action =
   | { type: ActionType.ReadyTimer }
   | { type: ActionType.ToggleShowSolutions }
   | { type: ActionType.ToggleGoToNextCaseAfterSolve }
+  | { type: ActionType.ToggleRandomCases }
   | { type: ActionType.SetAlgsToTrain; algsToTrain: AlgId[] }
   | { type: ActionType.ShowCasesModal }
   | { type: ActionType.HideCasesModal }
@@ -85,7 +87,7 @@ const reducer = (state: State, action: Action): State => {
       };
 
       const nextAlgId = state.goToNextCaseAfterSolve
-        ? Util.getRandomElement(state.algsToTrain, state.currentAlg.id)
+        ? Util.getNextElement(state.randomCases, state.algsToTrain, state.currentAlg.id)
         : state.currentAlg.id;
 
       const nextAlg = algs.find((alg) => alg.id === nextAlgId) ?? algs[0];
@@ -120,8 +122,14 @@ const reducer = (state: State, action: Action): State => {
         goToNextCaseAfterSolve: !state.goToNextCaseAfterSolve,
       };
     }
+    case ActionType.ToggleRandomCases: {
+      return {
+        ...state,
+        randomCases: !state.randomCases,
+      };
+    }
     case ActionType.GoToNextCase: {
-      const nextAlgId = Util.getRandomElement(state.algsToTrain, state.currentAlg.id);
+      const nextAlgId = Util.getNextElement(state.randomCases, state.algsToTrain, state.currentAlg.id);
       const nextAlg = algs.find((alg) => alg.id === nextAlgId) ?? algs[0];
 
       return {
@@ -130,7 +138,7 @@ const reducer = (state: State, action: Action): State => {
       };
     }
     case ActionType.SetAlgsToTrain: {
-      const nextAlgId = Util.getRandomElement(action.algsToTrain, state.currentAlg.id);
+      const nextAlgId = Util.getNextElement(state.randomCases, action.algsToTrain, state.currentAlg.id);
       const nextAlg = algs.find((alg) => alg.id === nextAlgId) ?? algs[0];
 
       return {
@@ -263,6 +271,7 @@ const sum = (a: number, b: number) => a + b;
 const Settings: React.FC<{
   showSolutions: boolean;
   goToNextCaseAfterSolve: boolean;
+  randomCases: boolean;
   dispatch: React.Dispatch<Action>;
 }> = React.memo((props) => {
   const toggleShowSolutions = () =>
@@ -273,6 +282,10 @@ const Settings: React.FC<{
 
   const showCasesModal = () =>
     props.dispatch({ type: ActionType.ShowCasesModal });
+
+  const ToggleRandomCases = () =>
+    props.dispatch({type: ActionType.ToggleRandomCases });
+
   return (
     <div className="border-b-2 border-bottom border-teal-300 p-2 ">
       <label className="flex items-center mb-2">
@@ -292,6 +305,15 @@ const Settings: React.FC<{
           onChange={toggleGoToNextCaseAfterSolve}
         />
         Go to next case after solve
+      </label>
+      <label className="flex items-center mb-2">
+        <input
+          className="block mr-2"
+          type="checkbox"
+          checked={props.randomCases}
+          onChange={ToggleRandomCases}
+        />
+        Random cases
       </label>
       <button
         className="border-teal-300 block w-full border-2 p-1 bg-teal-800 text-teal-300 rounded-md"
@@ -314,16 +336,20 @@ interface State {
   timer: Timer.Timer;
   showSolutions: boolean;
   goToNextCaseAfterSolve: boolean;
+  randomCases: boolean;
   times: Time[];
   showCasesModal: boolean;
 }
 
+const initial_algs_to_train = algs.filter((alg) => alg.enabled_by_default);
+
 const initialState: State = {
-  algsToTrain: algs.map((alg) => alg.id),
-  currentAlg: Util.getRandomElement(algs, algs[0]),
+  algsToTrain: initial_algs_to_train.map((alg) => alg.id),
+  currentAlg: Util.getNextElement(false, initial_algs_to_train, initial_algs_to_train[0]),
   timer: Timer.initial(),
   showSolutions: true,
   goToNextCaseAfterSolve: false,
+  randomCases: false,
   times: [],
   showCasesModal: false,
 };
@@ -402,6 +428,7 @@ function App() {
           <Settings
             showSolutions={state.showSolutions}
             goToNextCaseAfterSolve={state.goToNextCaseAfterSolve}
+            randomCases={state.randomCases}
             dispatch={dispatch}
           />
           <Times times={state.times} dispatch={dispatch} />
